@@ -3,7 +3,7 @@
     {
       "src": "locallibrary/wsgi.py",
       "use": "@vercel/python",
-      "config": { "runtime": "python3.10.2" }
+      "config": { "runtime": "python3.10" }
     }
   ],
   "routes": [

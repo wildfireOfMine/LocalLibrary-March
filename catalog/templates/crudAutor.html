@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<hr>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Funcionalidad 1" name="funcionalidad1" />
+    <input type="submit" value="Funcionalidad 2" name="funcionalidad2"/>
+    <input type="submit" value="Funcionalidad 3" name="funcionalidad3" />
+</form>
+
+<hr>
+
+
+{% endblock %}

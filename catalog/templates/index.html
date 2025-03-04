@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Local Library Home</h1>
+
+  <h1>Bienvenido, {{ user }}</h1>
+
+  <p>Welcome to <em>LocalLibrary</em>, a very basic Django website developed as a tutorial example on the Mozilla Developer Network.</p>
+
+<h2>Dynamic content</h2>
+
+  <p>The library has the following record counts:</p>
+  <ul><!-- href="{% url 'books' %}" -->
+    <li><strong><a href="{% url 'books' %}">Books</a>:</strong> {{ num_books }}</li>
+    <li><strong>Copies:</strong> {{ num_instances }}</li>
+    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+    <li><strong><a href="{% url 'authors' %}">Authors</a></strong> {{ num_authors }}</li>
+    <li><strong><a href="{% url 'albums' %}">Albums: </a></strong> {{ num_albums }}</li>
+    <li><strong>Número de copias de ábumes</strong>: {{ num_albuminst }}</li>
+    <li><strong>Número de usuarios</strong>: {{ num_users }}</li>
+  </ul>
+
+  <p>Times you've visited this website {{ num_visits }}</p>
+
+  <h2>El árbol de la Librería:</h2>
+  <q>El árbol de la vida</q>
+  <ul>
+    <li><strong>Index</strong>: <a href="{% url 'index' %}">es decir, donde estás actualmente</a></li>
+    <li><strong>Libros</strong>: <a href="{% url 'books' %}"">Lista de libros completa</a>, 
+                <a href="{% url 'book-detail' pk=1 %}">lista de libros según ID</a>,
+                <a href="{% url 'my-borrowed' %}">libros prestados</a>,
+                <a href="">formulario de libros</a></li>
+    <li><strong>Autores</strong>: <a href="{% url 'authors' %}">Lista de autores</a>, <a href="{% url 'author-detail' pk=1 %}">lista de autores según ID</a></li>
+    <li><strong>Álbumes</strong>: <a href="{% url 'albums' %}">lista de álbumes completa</a></li>
+    <li><strong>Respuestas con JSON</strong>: <a href="{% url 'respuestaGET' %}">dos campos con JSON</a>, 
+      <a href="{% url 'dosJSON' id1=1 id2=2 %}">dos campos con JSON según el enlace</a>,
+      <a href="{% url 'librosJSON' id=0 %}">lista de libros según JSON</a>,
+      <a href="{% url 'json-finder' %}">JSONFinder: Django con Fetch</a></li>
+    <li><strong>El Examen del 10-12-2024</strong>: <a href="{% url 'lector_list' %}">descargar lista de lectores</a>, 
+      <a href="{% url 'encuesta_list' %}">lista de encuestas</a></li>
+    <li><strong>Calculadora</strong>: <a href="{% url 'calculadora' %}">calculadora</a></li>
+    <li><strong>El usuario X</strong>: <a href="{% url 'darAltaUsuarioX' %}">revisar tu Usuario X</a></li>
+    <li><strong>Api RESTful</strong>: <a href="{% url 'api:autor-api' %}">revisar los autores en API RESTful</a></li>
+    <li><strong>Mi funcionalidad</strong>: <a href="{% url 'reservar' %}">reservar álbumes/libros</a></li>
+  </ul>
+
+{% endblock %}

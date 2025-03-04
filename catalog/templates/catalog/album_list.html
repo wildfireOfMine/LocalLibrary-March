@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Lista de álbumes</h1>
+    <form method="GET">
+      <input type="text" name="busqueda" placeholder="¡Búscame!" value="{{ busqueda }}">
+      <button type="submit">Buscar</button>
+    </form>
+    {% if album_list %}
+    <ul>
+
+      {% for album in album_list %}
+      <li> <a href="{{album.get_absolute_url}}">{{ album.nombre }}</a>, {{ album.banda }} </li>
+      {% endfor %}
+
+    </ul>
+
+    <p>¿Lista paginada? {{ is_paginated }}</p>
+    <p>Fecha actual: {{ now }}</p>
+    {% else %}
+      <p>No hay libros en la biblioteca. {{ num_albums }}</p>
+    {% endif %}
+    <a href="{% url 'formulario' %}">Añadir álbum</a>
+{% endblock %}

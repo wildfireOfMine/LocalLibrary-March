@@ -1,0 +1,48 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+     <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+  <h1>Title: {{ book.title }}</h1>
+
+  <p><strong>Autor:</strong>  <a href="{% url 'author-detail' book.author.pk %}"><strong>{{ book.author }}</strong></a></p> <!-- enlace de detalle del autor aún no definido -->
+  <p><strong>Resumen:</strong> {{ book.summary }}</p>
+  <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+  <p><strong>Idioma:</strong> {{ book.language }}</p>
+  <p><strong>Genero:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    {% if book.image %}
+  <p><strong>Cubierta: </strong> <img src="{{ book.image.url }}" alt="{{ book.title }}"></p>
+  <p><strong><a href="{% url 'crear-pdf' book.id %}">Crear PDF</a></strong></p>
+   {% endif %}
+   {% if book.video %}
+  <p><strong>Video: </strong> <video controls>
+    <source src="{{ book.video.url }}" type="video/mp4">
+    Tu navegador no soporta tanta esencia
+  </video></p>
+    {% endif%}
+
+    {% if book.pdf %}
+  <p><strong>PDF: </strong>  <embed src="{{ book.pdf.url }}" type="application/pdf" width="800" height="1000"></p>
+    {% endif %}
+   
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Copias</h4>
+
+    {% for copy in book.bookinstance_set.all %}
+    <hr>
+    <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+    {% if copy.status != 'a' %}<p><strong>Pendiente de devolución:</strong> {{copy.due_back}}</p>{% endif %}
+    <p><strong>Imprimir:</strong> {{copy.imprint}}</p>
+    <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+    {% endfor %}
+  </div>
+  <a href="{% url 'book-update' book.id %}"><button>Editar el Libro</button></a>
+  <a href="{% url 'book-delete' book.id %}"><button>Borrar el Libro</button></a>
+  <a href="{% url 'reservar' %}"><button>¡Reserva!</button></a>
+{% endblock %}

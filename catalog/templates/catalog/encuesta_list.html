@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Lista de Encuestas</h1>
+
+    {% if encuesta_list %}
+    <ul>
+
+      {% for encuesta in encuesta_list %}
+      <li>
+        <p>Código: {{encuesta.id}}, Pregunta: {{encuesta.pregunta}}, Estado: {{encuesta.estado}}, 
+           Fecha de Inicio: {{encuesta.fecha_inicio}}, Fecha de Finalización: {{encuesta.fecha_finalizacion}}, 
+           {% if encuesta.estado == "I" %}
+              Enlace: <a href="{% url 'descargaEncuesta' id=encuesta.id %}">Inicial</a></p>
+           {% elif encuesta.estado == "P" %}
+           Enlace: <a href="{% url 'descargaEncuesta' id=encuesta.id %}">Proceso</a></p>
+           {% elif encuesta.estado == "C" %}
+           Enlace: <a href="{% url 'descargaEncuesta' id=encuesta.id %}">Cerrado</a></p>
+           {% endif %}
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>No hay autores en la biblioteca.</p>
+    {% endif %}
+{% endblock %}

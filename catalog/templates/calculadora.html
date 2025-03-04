@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if limite > 3 and not user.is_superuser %}
+<h1>Ya has visitado este sitio más veces de las que podías por hoy</h1>
+<h2>¿Quieres más? Compra el Modo Prémium</h2>
+
+{% else %}
+<h1>Calculadora</h1>
+<h2>Bienvenido, {{user.get_username}} </h2>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <input name="resultado" value="{{ resultado }}" readonly><br>
+    <button type="submit" name="boton" value="7">7</button>
+    <button type="submit" name="boton" value="8">8</button>
+    <button type="submit" name="boton" value="9">9</button>
+    <button type="submit" name="boton" value="/">/</button>
+    <br>
+    <button type="submit" name="boton" value="4">4</button>
+    <button type="submit" name="boton" value="5">5</button>
+    <button type="submit" name="boton" value="6">6</button>
+    <button type="submit" name="boton" value="*">*</button>
+    <br>
+    <button type="submit" name="boton" value="1">1</button>
+    <button type="submit" name="boton" value="2">2</button>
+    <button type="submit" name="boton" value="3">3</button>
+    <button type="submit" name="boton" value="-">-</button>
+    <br>
+    <button type="submit" name="boton" value="0">0</button>
+    <button type="submit" name="boton" value="=">=</button>
+    <button type="submit" name="boton" value="+">+</button>
+</form>
+
+    <h2>Visitas: {{ num_visits }}</h2>
+
+{% endif %}
+{% endblock %}

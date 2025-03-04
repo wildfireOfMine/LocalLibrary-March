@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+  <h1>Title: {{ author }}</h1>
+
+  <p><strong>Autor:</strong> {{ author.first_name }}</p>
+  <p><strong>Apellido</strong>: {{ author.last_name }}</p>
+  <p><strong>Fecha de Nacimiento</strong>: {{ author.date_of_birth }}</p>
+  <p><strong>Fecha de muerte</strong>: {{ author.date_of_death }}</p>
+  <p><strong>Libros:</strong> </p>
+  {% if books %}
+  {% for book in books %}
+    <p>- <a href={{book.get_absolute_url}}>{{book}}</a></p>
+  {% endfor %}
+  {% else %}
+  <p>No publicó ningún libro</p>
+  {% endif %}
+
+  <a href="{% url 'author-update' author.id %}"><button>Editar el Autor</button></a>
+  <a href="{% url 'author-delete' author.id %}"><button>Borrar el Autor</button></a>
+{% endblock %}

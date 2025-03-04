@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Libros prestados y reservados</h1>
+
+    {% if albuminstance_list %}
+    <ul>
+
+      {% for albuminst in albuminstance_list %}
+      <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'album-detail' albuminst.album.pk %}">{{albuminst.album.nombre}}</a> ({{ albuminst.caducidad }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>No hay libros prestados.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<ul>
+    <li><h1>Nombre: {{album.nombre}}</h1></li>
+    <li><h1>Banda: {{album.banda}}</h1></li>
+    <li><h1>Tipo de álbum: {{album.tipo}}</h1></li>
+    <li><h1>Fecha de publicación: {{album.fechaDePublicacion}}</h1></li>
+    <li><h1>Nacionalidad: {{album.nacionalidad}}</h1></li>
+    <li><h1>Discográfica: {{album.discografica}}</h1></li>
+    <li><h1>Formato de álbum: {{album.formato}}</h1></li>
+    <li><h1>Canciones: {{album.canciones}}</h1></li>
+
+    {% if album.portada %}
+    <li><h1>Portada: <img src="{{album.portada.url}}"></h1></li>
+    {% endif %}
+
+    {% if album.recomendable %}
+    <li><h1>¿Recomendable?: Sí</h1></li>
+    {% else %}
+    <li><h1>¿Recomendable?: No</h1></li>
+    {% endif %}
+
+    {% if album.enlaceEnMetallum %}
+    <li><h1>Enlace a su página en Metallum: <a href="{{album.enlaceEnMetallum}}">{{album.enlaceEnMetallum}}</a></h1></li>
+    {% endif %}
+
+    <li><h1>Notas adicionales: {{album.notasAdicionales}}</h1></li>
+
+    <a href="{% url 'album-update' album.id %}"><button>Editar el Álbum</button></a>
+    <a href="{% url 'album-delete' album.id %}"><button>Borrar el álbum</button></a>
+    <a href="{% url 'reservar' %}"><button>¡Reserva!</button></a>
+</ul>
+    <h2>¿Otras recomendaciones de la misma banda?</h2>
+
+    {% for recomendacion in recomendaciones %}
+        {% if recomendacion.id != album.id %}
+    <h2><a href="{%url 'album-detail' recomendacion.id %}">{{recomendacion}}</a></h2>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

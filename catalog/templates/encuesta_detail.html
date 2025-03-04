@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+  <h1>Encuesta: {{ Encuestas.pregunta }}</h1>
+  <p>ID: {{ Encuestas.id }}</p>
+  <p>Estado {{ Encuestas.estado }}</p>
+  <p>Fecha de Inicio: {{ Encuestas.fecha_inicio }}</p>
+  <p>Fecha de Finalización: {{ Encuestas.fecha_finalizacion }}</p>
+  <h1>Respuestas: </h1>
+  {% for respuesta in Respuestas %}
+    <p>{{ respuesta }} <br> sus votos: {{ respuesta.votos }} </p>
+    <br>
+  {% endfor %}
+  
+
+{% endblock %}

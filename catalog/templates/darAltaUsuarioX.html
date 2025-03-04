@@ -1,0 +1,50 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if messages %}
+<ul>
+  {% for message in messages %}
+     <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        {% if request.user.usuariox != "" %}
+        <input disabled name="submit" type="submit" value="Dar de alta"/>
+        <input name="update" type="submit" value="Editar tu Usuario X"/>
+        <input name="delete" type="submit" value="Borrar tu Usuario X"/>
+        {% else %}
+        <input name="submit" type="submit" value="Dar de alta"/>
+        <input disabled name="update" type="submit" value="Editar tu Usuario X"/>
+        <input disabled name="delete" type="submit" value="Borrar tu Usuario X"/>
+        {% endif %}
+
+    </form>
+
+
+
+{% if request.user.usuariox != ""%}
+<h1>¡Ya tienes un Usuario X!</h1>
+<ol>
+    <h2>Nombres: {{ nombres }}</h2>
+    <h2>Apellidos: {{ apellidos }}</h2>
+    <h2>Correo: {{ correo }}</h2>
+    <h2>Dirección: {{ direccion }}</h2>
+    <h2>Municipio: {{ municipio }}</h2>
+    <h2>Aficiones: {{ aficiones }}</h2>
+    <h2>Y, tu usuario del sistema: {{ request.user }}</h2>
+</ol>
+{% endif %}
+
+<hr>
+
+
+{% endblock %}

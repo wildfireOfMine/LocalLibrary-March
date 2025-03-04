@@ -16,4 +16,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'locallibrary.settings')
 application = get_wsgi_application()
 
 # Para despliegue en Vercel
-app = applicationaaa
+app = application

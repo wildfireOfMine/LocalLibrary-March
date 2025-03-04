@@ -16,7 +16,7 @@ This repository here serves as a way of posting online what I have done so far.
 2. Navigate to the project directory:
    ```bash
    cd LocalLibrary-March
-3.- Run the following commands:
+3. Run the following commands:
     ```bash
     pip install -r requirements.txt
     python3 manage.py makemigrations

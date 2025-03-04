@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-eg_@u+ann90cl@eeq3-9%xe1mry$_)h4p(h$(m+m%gn#c1h%n+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.vercel.app']
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -143,18 +144,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ]
 }
-
-import os
-# Cargar la variable de entorno. El segundo argumento es
-# el valor que ha de tomarse cuando la variable no esté
-# definida.
-stage = os.getenv("MYPROJECT_STAGE", "development")
-if stage == "production":
-    # Producción.
-    from .settings_production import *
-elif stage == "development":
-    # Desarrollo.
-    from .settings_dev import *
-else:
-    # Arrojar un error si MYPROJECT_STAGE tiene un valor desconocido.
-    raise ValueError("Unknown stage: {stage}")
